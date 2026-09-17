@@ -1,5 +1,22 @@
 # OptoCore-3D
 
+DOCUMENT IDENTIFIER: ARCH-3D-PCM-2026-V1  
+STATUS: Open Public Architecture Specification / Prior Art  
+AUTHOR / DESIGNER: andykostin1-maker  
+LICENSE: PROPRIETARY — ALL RIGHTS RESERVED
+
+## Legal Notice
+
+This repository contains proprietary technical documentation and architectural concepts.
+
+No permission is granted to copy, reproduce, modify, distribute, publish, commercialize, manufacture, implement, or create derivative works based on any part of this repository.
+
+Repository access grants no patent, trade-secret, know-how, copyright, or other intellectual-property license or rights.
+
+Any commercial evaluation, due diligence, collaboration, licensing, or acquisition discussion requires a separate written agreement with the rights holder. Initial non-confidential inquiries may be submitted through the repository issue tracker (Issues tab); do not include confidential information in public issues, and any formal permission request must proceed through a private channel arranged by the rights holder.
+
+This notice is not legal advice and does not replace professionally drafted agreements.
+
 > [!WARNING]
 > **Simulation-only project.** All performance, power, and thermal numbers in this repository are outputs of an architectural simulator. They are **not** measurements from fabricated silicon.
 
