@@ -45,12 +45,12 @@ The processor is a multilayer 3D monocrystal that combines classical silicon mic
 #### 2.2. Solid-State Optical Switches
 The architecture fully rejects mechanical elements (MEMS / DMD micromirrors) because of their high inertia (limit near $10^{-6}$ s) and mechanical wear. Instead, it uses solid-state optical gates:
 * **Phase-Change Materials (PCMs):** Thin-film coatings based on phase-change compounds (for example, $\text{Ge}_2\text{Sb}_2\text{Te}_5$ / $\text{GST}$ or $\text{Sb}_2\text{Se}_3$). Under a point control pulse, the material rapidly switches between amorphous (transparent) and crystalline (highly reflective) states.
-* **Electro-optic modulators:** Use of Lithium Niobate crystals (LiNbO3, $\text{LiNbO}_3$), including Lithium Niobate (LiNbO3) phase shifters, that modify refractive index ($\Delta n$) via the Pockels effect.
+* **Electro-optic modulators:** Use of Lithium Niobate (LiNbO3, $\text{LiNbO}_3$) crystals used as phase shifters that modify refractive index ($\Delta n$) via the Pockels effect.
 * **Switching physics:** Local changes in refractive index ($n$) and absorption ($k$) redirect or block optical flux at frequencies up to tens and hundreds of gigahertz (switch latency $10^{-12}$ s) without mechanical friction and without Joule heating from current flow through $p$-$n$ junctions.
 
 #### 2.3. Waveguide Bus and Wavelength-Division Multiplexing (WDM)
 In-crystal data transfer is performed through a three-dimensional network of profiled optical waveguides with Wavelength-Division Multiplexing (WDM):
-* The same physical waveguide volume simultaneously carries multiple independent data streams separated by wavelengths ($\lambda_1, \lambda_2 \dots \lambda_n$).
+* The same waveguide channel simultaneously carries multiple independent data streams separated by wavelengths ($\lambda_1, \lambda_2 \dots \lambda_n$).
 * Different spectral ranges perceive refractive and interference configurations independently, multiplying compute parallelism per unit volume of material.
 
 ---
@@ -60,7 +60,7 @@ In-crystal data transfer is performed through a three-dimensional network of pro
 #### 3.1. Trajectory Routing (Route-Tracing vs. Gate Switching)
 In classical processors, a mathematical operation (for example, vector-matrix multiplication) is executed by sequential reconfiguration of billions of transistors that delay and heat charge transport.
 
-In the proposed photonic chip, computation is transferred into spatial topology:
+In the proposed photonic chip, computation is implemented in spatial topology:
 1. The input data vector is converted into a coherent array of light beams with specified amplitudes and phases.
 2. Light is injected into a 3D labyrinth of phase-spatial channels and optical switches.
 3. Weight multiplication and summation occur physically during light propagation through the substrate by diffraction, phase shift, and interference.
@@ -73,8 +73,8 @@ In the proposed photonic chip, computation is transferred into spatial topology:
 │ (Laser pulse)                              (Phase channels / PCM)      │
 │                                                         │               │
 │                                                         ▼               │
-│ Final Output <── [ Coordinate and Angle ] <── [ Output Optical ]        │
-│ (Vector / Token)    Measurement               Pattern / Interference    │
+│ Final Output <── [ Coordinate and Angle ] <── [ Output Light Pattern ]  │
+│ (Vector / Token)    Measurement               / Interference             │
 └─────────────────────────────────────────────────────────────────────────┘
 #### 3.2. Embedded Weights and Zero-Cold-Start Inference
 Conventional AI accelerators require mandatory warm-up: prolonged loading of terabytes of model weights from slow external memory (SSD/DRAM) into internal registers. The photonic processor removes the Von Neumann bottleneck:
@@ -94,7 +94,7 @@ Instead of incoherent light scattering in open volume, beams are tightly localiz
 When ambient temperature changes, the monocrystal undergoes linear and proportional expansion in all directions. The spacing between notches changes predictably, allowing thermal drift compensation by firmware-controlled adjustment of the source-laser wavelength by fractions of a nanometer, returning the matrix to focus.
 
 #### 4.2. Isothermal Regime and Micro-Peltier Elements
-Unlike silicon GPUs, where Joule heating $I^2R$ in transistors creates chaotic local hotspots, the photonic labyrinth minimizes compute-path heat dissipation during light propagation.
+Unlike silicon GPUs, where Joule heating $I^2R$ in transistors creates chaotic local hotspots, the photonic labyrinth does not dissipate heat during light propagation.
 
 The chip operates in an isothermal state. Precise temperature control near $25^\circ\text{C}$ requires a miniature micro-Peltier element on the CMOS layer in the 0.5–1 W power range, eliminating the need for bulky liquid or air-cooling systems.
 
