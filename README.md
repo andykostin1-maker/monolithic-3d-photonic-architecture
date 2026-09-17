@@ -28,7 +28,7 @@ This notice is not legal advice and does not replace professionally drafted agre
 
 ### 1. Title & Abstract
 
-**Abstract:**  
+**Abstract:**
 Classical silicon semiconductor microelectronics has reached a fundamental physical limit. Joule heating at $p$-$n$ junctions, parasitic capacitance of long metal interconnects, and data-transfer latency between the processor and volatile memory (the Von Neumann bottleneck) prevent further scaling of AI-chip compute density and energy efficiency.
 
 This technical specification presents a monolithic 3D heterogeneous optoelectronic processor architecture that addresses latency and heat generation by replacing transistor electrical switching with spatial light routing. The architecture combines a lower silicon control layer with a three-dimensional photonic crystal containing waveguides and solid-state optical switches. The use of Phase-Change Materials (PCMs) and electro-optic crystals enables optical-channel switching at picosecond scale ($10^{-12}$ s) without mechanical motion and without semiconductor resistive losses. The full base neural-network weight matrix is encoded directly in the processor's three-dimensional geometry and phase channels, removing the need for volatile memory (DRAM/HBM) and enabling immediate execution ($Zero\text{-}Cold\text{-}Start$) with near-zero structural heating during operation.
@@ -116,10 +116,10 @@ The chip operates in an isothermal state. Precise temperature control near $25^\
 
 The photonic processor is intended for fully autonomous, high-performance compute nodes implemented directly at the hardware level:
 
-* **Embedded autonomous AI modules (Cold-Cycle Processing):**  
+* **Embedded autonomous AI modules (Cold-Cycle Processing):**
   Due to removal of the thermal deadlock and volatile memory dependence, a processor with an embedded model can be integrated directly into control boards for robotics, autonomous transport, aerospace systems, and portable devices.
 
-* **Local on-device inference without cloud connectivity:**  
+* **Local on-device inference without cloud connectivity:**
   The chip is designed to execute full-size contemporary generative and multimodal models on-device. The capability that previously required server racks with kilowatt-scale GPUs and liquid cooling is condensed into a single solid-state monocrystal powered by a standard low-power supply.
 
 ---
