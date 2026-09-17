@@ -2,7 +2,19 @@
 DOCUMENT IDENTIFIER: ARCH-3D-PCM-2026-V1
 STATUS: Open Public Architecture Specification / Prior Art
 AUTHOR / DESIGNER: andykostin1-maker
-LICENSE: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+LICENSE: PROPRIETARY — ALL RIGHTS RESERVED
+
+## Legal Notice
+
+This repository contains proprietary technical documentation and architectural concepts.
+
+No permission is granted to copy, reproduce, modify, distribute, publish, commercialize, manufacture, implement, or create derivative works based on any part of this repository.
+
+Repository access grants no patent, trade-secret, know-how, copyright, or other intellectual-property license or rights.
+
+Any commercial evaluation, due diligence, collaboration, licensing, or acquisition discussion requires a separate written agreement with the rights holder. Initial non-confidential inquiries may be submitted through the repository issue tracker (Issues tab); do not include confidential information in public issues, and any formal permission request must proceed through a private channel arranged by the rights holder.
+
+This notice is not legal advice and does not replace professionally drafted agreements.
 
 
 ---
@@ -16,7 +28,7 @@ LICENSE: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0
 
 ### 1. Title & Abstract
 
-**Abstract:**  
+**Abstract:**
 Classical silicon semiconductor microelectronics has reached a fundamental physical limit. Joule heating at $p$-$n$ junctions, parasitic capacitance of long metal interconnects, and data-transfer latency between the processor and volatile memory (the Von Neumann bottleneck) prevent further scaling of AI-chip compute density and energy efficiency.
 
 This technical specification presents a monolithic 3D heterogeneous optoelectronic processor architecture that addresses latency and heat generation by replacing transistor electrical switching with spatial light routing. The architecture combines a lower silicon control layer with a three-dimensional photonic crystal containing waveguides and solid-state optical switches. The use of Phase-Change Materials (PCMs) and electro-optic crystals enables optical-channel switching at picosecond scale ($10^{-12}$ s) without mechanical motion and without semiconductor resistive losses. The full base neural-network weight matrix is encoded directly in the processor's three-dimensional geometry and phase channels, removing the need for volatile memory (DRAM/HBM) and enabling immediate execution ($Zero\text{-}Cold\text{-}Start$) with near-zero structural heating during operation.
@@ -104,10 +116,10 @@ The chip operates in an isothermal state. Precise temperature control near $25^\
 
 The photonic processor is intended for fully autonomous, high-performance compute nodes implemented directly at the hardware level:
 
-* **Embedded autonomous AI modules (Cold-Cycle Processing):**  
+* **Embedded autonomous AI modules (Cold-Cycle Processing):**
   Due to removal of the thermal deadlock and volatile memory dependence, a processor with an embedded model can be integrated directly into control boards for robotics, autonomous transport, aerospace systems, and portable devices.
 
-* **Local on-device inference without cloud connectivity:**  
+* **Local on-device inference without cloud connectivity:**
   The chip is designed to execute full-size contemporary generative and multimodal models on-device. The capability that previously required server racks with kilowatt-scale GPUs and liquid cooling is condensed into a single solid-state monocrystal powered by a standard low-power supply.
 
 ---
@@ -116,7 +128,7 @@ The photonic processor is intended for fully autonomous, high-performance comput
 
 #### Comparative Analysis of Chip Architectural Parameters
 
-| Parameter                         | Silicon GPU/NPU (Nvidia)                           | Optical MEMS (DMD arrays)           | Proposed 3D-PCM Architecture                              |
+| Parameter                          | Silicon GPU/NPU (Nvidia)                            | Optical MEMS (DMD arrays)          | Proposed 3D-PCM Architecture                              |
 | :--- | :--- | :--- | :--- |
 | **Physical principle**            | Semiconductor $p$-$n$ junction switching           | Mechanical micromirror rotation     | **Solid-state phase-spatial routing**                     |
 | **Key latency**                   | Nanoseconds ($10^{-9}$ s)                          | Microseconds ($10^{-6}$ s)          | **Picoseconds ($10^{-12}$ s)**                            |
