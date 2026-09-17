@@ -45,7 +45,7 @@ The processor is a multilayer 3D monocrystal that combines classical silicon mic
 #### 2.2. Solid-State Optical Switches
 The architecture fully rejects mechanical elements (MEMS / DMD micromirrors) because of their high inertia (limit near $10^{-6}$ s) and mechanical wear. Instead, it uses solid-state optical gates:
 * **Phase-Change Materials (PCMs):** Thin-film coatings based on phase-change compounds (for example, $\text{Ge}_2\text{Sb}_2\text{Te}_5$ / $\text{GST}$ or $\text{Sb}_2\text{Se}_3$). Under a point control pulse, the material rapidly switches between amorphous (transparent) and crystalline (highly reflective) states.
-* **Electro-optic modulators:** Use of Lithium Niobate crystals (LiNbO3, $\text{LiNbO}_3$) that modify refractive index ($\Delta n$) via the Pockels effect.
+* **Electro-optic modulators:** Use of Lithium Niobate crystals (LiNbO3) that modify refractive index ($\Delta n$) via the Pockels effect.
 * **Switching physics:** Local changes in refractive index ($n$) and absorption ($k$) redirect or block optical flux at frequencies up to tens and hundreds of gigahertz (switch latency $10^{-12}$ s) without mechanical friction and without Joule heating from current flow through $p$-$n$ junctions.
 
 #### 2.3. Waveguide Bus and Wavelength-Division Multiplexing (WDM)
@@ -121,6 +121,6 @@ The photonic processor is intended for fully autonomous, high-performance comput
 | **Physical principle**            | Semiconductor $p$-$n$ junction switching           | Mechanical micromirror rotation     | **Solid-state phase-spatial routing**                     |
 | **Key latency**                   | Nanoseconds ($10^{-9}$ s)                          | Microseconds ($10^{-6}$ s)          | **Picoseconds ($10^{-12}$ s)**                            |
 | **Memory architecture**           | External HBM/DRAM (Von Neumann bottleneck)         | Absent                              | **Encoded in crystal geometry ($Zero\text{-}Cold\text{-}Start$)** |
-| *Power dissipation during compute*| High (Joule heating, thermal deadlock)             | Medium (mechanical drive cost)      | **Near-zero ($Zero\text{-}Cold\text{-}Start$, no compute heating)**  |
+| *Power dissipation during compute*| High (Joule heating, thermal deadlock)             | Medium (mechanical drive cost)      | **Near-zero ($Cold\text{-}Cycle$, no compute heating)**  |
 | **Parallelism density**           | Limited by planar lithography and heating          | Limited by physical mirror size     | **Ultra-high (WDM multiplexing in 3D volume)**            |
 | **Mechanical wear**               | Absent                                              | Present (micro-hinge fatigue)       | **Absent (fully monocrystalline stack)**                  |
