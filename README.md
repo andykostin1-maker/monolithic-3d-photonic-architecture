@@ -1,7 +1,7 @@
 # OptoCore-3D
 
 DOCUMENT IDENTIFIER: ARCH-3D-PCM-2026-V1  
-STATUS: Open Public Architecture Specification / Prior Art  
+STATUS: Public High-Level Overview / Selective Disclosure; Proprietary Implementation  
 AUTHOR / DESIGNER: andykostin1-maker  
 LICENSE: PROPRIETARY — ALL RIGHTS RESERVED
 
@@ -9,11 +9,15 @@ LICENSE: PROPRIETARY — ALL RIGHTS RESERVED
 
 This repository contains proprietary technical documentation and architectural concepts.
 
-No permission is granted to copy, reproduce, modify, distribute, publish, commercialize, manufacture, implement, or create derivative works based on any part of this repository.
+This repository provides a public high-level, non-enabling overview of selected architectural concepts and selected simulation results. Complete implementation details, proprietary methods, calibration data, device-level parameters, layout/process information, confidential simulation inputs, and manufacturing know-how are intentionally withheld and remain proprietary or confidential where applicable.
+
+No permission is granted to copy, reproduce, modify, distribute, publish, commercialize, manufacture, implement, reverse engineer, or create derivative works based on any part of this repository, subject to applicable law.
 
 Repository access grants no patent, trade-secret, know-how, copyright, or other intellectual-property license or rights.
 
-Any commercial evaluation, due diligence, collaboration, licensing, or acquisition discussion requires a separate written agreement with the rights holder. Initial non-confidential inquiries may be submitted through the repository issue tracker (Issues tab); do not include confidential information in public issues, and any formal permission request must proceed through a private channel arranged by the rights holder.
+Disclosure / prior-art clarification: this repository records a dated public disclosure of selected high-level concepts and materials. It is not intended to constitute a complete defensive publication of proprietary implementation details, and this notice does not itself establish patent rights, patentability, trade-secret status, or legal prior-art effect in any jurisdiction.
+
+Any technical evaluation, due diligence, collaboration, licensing, acquisition, or investment discussion requires prior written permission and may require a separate confidentiality agreement. Initial non-confidential inquiries may be submitted through the repository issue tracker (Issues tab); do not include confidential information in public issues, and any formal permission request must proceed through a private channel arranged by the rights holder.
 
 This notice is not legal advice and does not replace professionally drafted agreements.
 
