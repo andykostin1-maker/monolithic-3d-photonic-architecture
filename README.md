@@ -45,7 +45,7 @@ The processor is a multilayer 3D monocrystal that combines classical silicon mic
 #### 2.2. Solid-State Optical Switches
 The architecture fully rejects mechanical elements (MEMS / DMD micromirrors) because of their high inertia (limit near $10^{-6}$ s) and mechanical wear. Instead, it uses solid-state optical gates:
 * **Phase-Change Materials (PCMs):** Thin-film coatings based on phase-change compounds (for example, $\text{Ge}_2\text{Sb}_2\text{Te}_5$ / $\text{GST}$ or $\text{Sb}_2\text{Se}_3$). Under a point control pulse, the material rapidly switches between amorphous (transparent) and crystalline (highly reflective) states.
-* **Electro-optic modulators:** Use of Lithium Niobate (LiNbO3, $\text{LiNbO}_3$) crystals as phase shifters that modify refractive index ($\Delta n$) via the Pockels effect.
+* **Electro-optic modulators:** Use of Lithium Niobate (LiNbO3, $\text{LiNbO}_3$) electro-optic modulators, including Lithium Niobate (LiNbO3) phase shifters, that modify refractive index ($\Delta n$) via the Pockels effect.
 * **Switching physics:** Local changes in refractive index ($n$) and absorption ($k$) redirect or block optical flux at frequencies up to tens and hundreds of gigahertz (switch latency $10^{-12}$ s) without mechanical friction and without Joule heating from current flow through $p$-$n$ junctions.
 
 #### 2.3. Waveguide Bus and Wavelength-Division Multiplexing (WDM)
@@ -108,7 +108,7 @@ The photonic processor is intended for fully autonomous, high-performance comput
   Due to removal of the thermal deadlock and volatile memory dependence, a processor with an embedded model can be integrated directly into control boards for robotics, autonomous transport, aerospace systems, and portable devices.
 
 * **Local on-device inference without cloud connectivity:**  
-  The chip is designed to execute full-size contemporary generative and multimodal models on-device. As a design objective, capability that previously required server racks with kilowatt-scale GPUs and liquid cooling is condensed into a single solid-state monocrystal powered by a standard low-power supply.
+  The chip is designed to execute full-size contemporary generative and multimodal models on-device. As a design objective, the capability that previously required server racks with kilowatt-scale GPUs and liquid cooling is condensed into a single solid-state monocrystal powered by a standard low-power supply.
 
 ---
 
