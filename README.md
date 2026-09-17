@@ -2,7 +2,19 @@
 DOCUMENT IDENTIFIER: ARCH-3D-PCM-2026-V1
 STATUS: Open Public Architecture Specification / Prior Art
 AUTHOR / DESIGNER: andykostin1-maker
-LICENSE: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+LICENSE: PROPRIETARY — ALL RIGHTS RESERVED
+
+## Legal Notice
+
+This repository contains proprietary technical documentation and architectural concepts.
+
+No permission is granted to copy, reproduce, modify, distribute, publish, commercialize, manufacture, implement, or create derivative works based on any part of this repository.
+
+Repository access grants no patent, trade-secret, know-how, copyright, or other intellectual-property license or rights.
+
+Any commercial evaluation, due diligence, collaboration, licensing, or acquisition discussion requires a separate written agreement with the rights holder.
+
+This notice is not legal advice and does not replace professionally drafted agreements.
 
 
 ---
@@ -124,4 +136,3 @@ LICENSE: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0
 | *Энерговыделение при вычислениях*| Высокое (Джоулев нагрев, тепловой тупик)         | Среднее (Затраты на механический привод) | **Околонулевое ($Cold\text{-}Cycle$, нагрев отсутствует)** |
 | **Плотность параллелизма**       | Ограничена плоскостной литографией и нагревом    | Ограничена физическим размером зеркал | **Сверхвысокая (WDM-мультиплексирование в 3D-объеме)** |
 | **Механический износ**           | Отсутствует                                      | Присутствует (усталость микрошарниров) | **Отсутствует (полноценный монокристалл)** |
-
