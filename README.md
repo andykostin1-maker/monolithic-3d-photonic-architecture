@@ -7,121 +7,121 @@ LICENSE: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0
 
 ---
 
-# ТЕХНИЧЕСКАЯ СПЕЦИФИКАЦИЯ / ARCHITECTURE MANIFEST
-## Monolithic 3D-Stacked Photonic Processor Architecture Using Phase-Change Materials and Waveguide Route-Tracing for Non-Von Neumann Zero-Cold-Start Inference
+# TECHNICAL SPECIFICATION / ARCHITECTURE MANIFEST
+## Monolithic 3D-Stacked Photonic Processor Architecture Using Phase-Change Materials and Waveguide Routing for Non-Von Neumann Zero-Cold-Start Inference
 
-*(Монолитная 3D-гетерогенная архитектура фотонного процессора на базе фазово-переменных материалов и пространственно-волноводной маршрутизации для бестокового вывода нейросетей без архитектуры фон Неймана)*
-
----
-
-### 1. Title & Abstract (Заголовок и Аннотация)
-
-**Аннотация (Abstract):**  
-Классическая полупроводниковая микроэлектроника на базе кремния подошла к фундаментальному физическому тупику. Джоулев нагрев на $p$-$n$ переходах, паразитная емкость длинных металлических проводников и задержки переноса данных между процессором и энергозависимой памятью («бутылочное горлышко фон Неймана») делают невозможным дальнейшее масштабирование вычислительной плотности и энергоэффективности ИИ-чипов.
-
-В данной технической спецификации представлена архитектура монолитного 3D-гетерогенного оптоэлектронного процессора, решающего проблему задержек и тепловыделения путем полной замены электрического переключения транзисторов на пространственную маршрутизацию света. Архитектура объединяет нижний кремниевый слой управления и трехмерный фотонный кристалл с волноводами и твердотельными оптическими ключами. Использование материалов с фазовым переходом (PCM) и электрооптических кристаллов позволяет выполнять переключение оптических каналов на пикосекундном уровне ($10^{-12}$ с) без механических движений и без сопротивления полупроводников. Вся базовая матрица весов нейросети запечатлена непосредственно в трехмерной геометрии и фазовых каналах процессора, что устраняет необходимость в оперативной памяти (DRAM/HBM) и обеспечивает мгновенное исполнение вычислений ($Zero\text{-}Cold\text{-}Start$) при околонулевом нагреве структуры в процессе выполнения операций.
+*(Monolithic 3D heterogeneous photonic-processor architecture based on phase-change materials and spatial waveguide routing for zero-power neural inference without a Von Neumann architecture)*
 
 ---
 
-### 2. Physical & Materialist Basis (Физико-материаловедческий базис)
+### 1. Title & Abstract
 
-#### 2.1. Монолитная 3D-гетерогенная структура (Hybrid Stack)
-Процессор представляет собой многослойный 3D-монокристалл, сочетающий классическую кремниевую микроэлектронику и объемную фотонику:
-* **Слой 0 (Кремниевая CMOS-подложка):** Выполняет функцию высокоскоростного дискретного коммутатора и логического контроллера. Он управляет точечными импульсами, вводом-выводом сигналов и интерфейсом сопряжения.
-* **Межуровневый интерфейс (Through-Silicon Vias / Micro-Vias):** Вертикальные микронные каналы связи. Расстояние между электронным затвором и оптическим излучателем сжато с сантиметров (как на печатных платах) до единиц микрометров. Это полностью ликвидирует паразитную емкость длинных медных связей и снижает затраты энергии на передачу сигнала на несколько порядков.
-* **Слой 1..N (Объемный фотонный кристалл):** Исполнительные вычислительные слои на основе прозрачных подложек из нитрида кремния ($\text{Si}_3\text{N}_4$), диоксида кремния ($\text{SiO}_2$) или кремния на изоляторе (Silicon-on-Insulator, SOI).
+**Abstract:**  
+Classical silicon semiconductor microelectronics has reached a fundamental physical limit. Joule heating at $p$-$n$ junctions, parasitic capacitance of long metal interconnects, and data-transfer latency between the processor and volatile memory (the Von Neumann bottleneck) prevent further scaling of AI-chip compute density and energy efficiency.
+
+This technical specification presents a monolithic 3D heterogeneous optoelectronic processor architecture that addresses latency and heat generation by replacing transistor electrical switching with spatial light routing. The architecture combines a lower silicon control layer with a three-dimensional photonic crystal containing waveguides and solid-state optical switches. The use of Phase-Change Materials (PCMs) and electro-optic crystals enables optical-channel switching at picosecond scale ($10^{-12}$ s) without mechanical motion and without semiconductor resistive losses. The full base neural-network weight matrix is encoded directly in the processor's three-dimensional geometry and phase channels, removing the need for operational memory (DRAM/HBM) and enabling immediate execution ($Zero\text{-}Cold\text{-}Start$) with near-zero structural heating during operation.
+
+---
+
+### 2. Physical & Materials Basis
+
+#### 2.1. Monolithic 3D Heterogeneous Structure (Hybrid Stack)
+The processor is a multilayer 3D monocrystal that combines classical silicon microelectronics and volumetric photonics:
+* **Layer 0 (Silicon CMOS substrate):** Provides high-speed discrete switching and logic control. It controls point pulses, signal input/output, and the coupling interface.
+* **Interlayer interface (Through-Silicon Vias (TSVs) / microvias):** Vertical micron-scale communication channels. The distance between the electronic gate and the optical emitter is reduced from centimeters (as on printed circuit boards) to a few micrometers. This removes parasitic capacitance of long copper links and reduces signal-transfer energy by multiple orders of magnitude.
+* **Layer 1..N (Volumetric photonic crystal):** Execution compute layers based on transparent substrates of silicon nitride ($\text{Si}_3\text{N}_4$), silicon dioxide ($\text{SiO}_2$), or Silicon-on-Insulator (SOI).
 
 ┌─────────────────────────────────────────────────────────────────────────┐
-│              АРХИТЕКТУРА ТРЕХМЕРНОГО ОПТОЭЛЕКТРОННОГО СТЕКА             │
+│              THREE-DIMENSIONAL OPTOELECTRONIC STACK ARCHITECTURE      │
 ├─────────────────────────────────────────────────────────────────────────┤
-│ [ ФОТОННЫЕ ВЫЧИСЛИТЕЛЬНЫЕ СЛОИ ]  ──> Пространственные волноводы,       │
-│                                       PCM-ключи, решетки Брэгга         │
+│ [ PHOTONIC COMPUTE LAYERS ]      ──> Spatial waveguides, PCM switches, │
+│                                       Bragg gratings                    │
 │ ─────────────────────────────────────────────────────────────────────── │
-│ [ МЕЖУРОВНЕВЫЕ МИКРО-VIAS ]       ──> Длина связей: Единицы МИКРОНОВ    │
+│ [ INTERLAYER MICROVIAS ]         ──> Interconnect length: micrometers  │
 │ ─────────────────────────────────────────────────────────────────────── │
-│ [ КРЕМНИЕВЫЙ CMOS-КОНТРОЛЛЕР ]    ──> Драйвер импульсов, ввод/вывод     │
+│ [ SILICON CMOS CONTROLLER ]      ──> Pulse driver, I/O                 │
 └─────────────────────────────────────────────────────────────────────────┘
 
-#### 2.2. Твердотельные оптические ключи (Solid-State Optical Keys)
-Архитектура полностью отказывается от механических элементов (MEMS / микрозеркал DMD) из-за их высокой инерционности (ограничение в $10^{-6}$ с) и механического износа. Вместо этого применяются твердотельные оптические затворы:
-* **Phase-Change Materials (PCM):** Тонкопленочные покрытия на базе фазово-переменных соединений (например, $\text{Ge}_2\text{Sb}_2\text{Te}_5$ / $\text{GST}$ или $\text{Sb}_2\text{Se}_3$). Под воздействием точечного управляющего импульса материал мгновенно переключается между аморфным (прозрачным) и кристаллическим (высокоотражающим) состояниями.
-* **Электрооптические модуляторы:** Использование кристаллов Ниобата Лития ($\text{LiNbO}_3$), меняющих показатель преломления ($\Delta n$) за счет эффекта Поккельса.
-* **Физика переключения:** Локальное изменение показателей преломления ($n$) и поглощения ($k$) перенаправляет или блокирует световой поток на частотах до десятков и сотен гигагерц (задержка ключа — $10^{-12}$ с) без механического трения и без Джоулева нагрева от протекания тока через $p$-$n$ переходы.
+#### 2.2. Solid-State Optical Switches
+The architecture fully rejects mechanical elements (MEMS / DMD micromirrors) because of their high inertia (limit near $10^{-6}$ s) and mechanical wear. Instead, it uses solid-state optical gates:
+* **Phase-Change Materials (PCMs):** Thin-film coatings based on phase-change compounds (for example, $\text{Ge}_2\text{Sb}_2\text{Te}_5$ / $\text{GST}$ or $\text{Sb}_2\text{Se}_3$). Under a point control pulse, the material rapidly switches between amorphous (transparent) and crystalline (highly reflective) states.
+* **Electro-optic modulators:** Use of Lithium Niobate (LiNbO3) phase shifters that modify refractive index ($\Delta n$) via the Pockels effect.
+* **Switching physics:** Local changes in refractive index ($n$) and absorption ($k$) redirect or block optical flux at frequencies up to tens and hundreds of gigahertz (switch latency $10^{-12}$ s) without mechanical friction and without Joule heating from current flow through $p$-$n$ junctions.
 
-#### 2.3. Шина волноводов и Спектральное мультиплексирование (WDM)
-Передача данных внутри кристалла осуществляется через трехмерную сеть профилированных оптических волноводов с поддержкой спектрального мультиплексирования (Wave-Division Multiplexing):
-* Один и тот же физический объем волновода одновременно прокачивает несколько независимых потоков данных, разделенных по длинам волн ($\lambda_1, \lambda_2 \dots \lambda_n$).
-* Разные спектральные диапазоны воспринимают конфигурацию преломления и интерференции независимо друг от друга, умножая параллелизм вычислений в единице объема материи.
+#### 2.3. Waveguide Bus and Wavelength-Division Multiplexing (WDM)
+In-crystal data transfer is performed through a three-dimensional network of profiled optical waveguides with Wavelength-Division Multiplexing (WDM):
+* The same physical waveguide volume simultaneously carries multiple independent data streams separated by wavelengths ($\lambda_1, \lambda_2 \dots \lambda_n$).
+* Different spectral ranges perceive refractive and interference configurations independently, multiplying compute parallelism per unit volume of material.
 
 ---
 
-### 3. Mathematical & Logic Model (Логико-геометрическая модель)
+### 3. Mathematical & Logic Model
 
-#### 3.1. Маршрутизация траекторий (Route-Tracing vs. Gate Switching)
-В классических процессорах математическая операция (например, умножение векторов и матриц) выполняется путем последовательной перекоммутации миллиардов транзисторов, задерживающих и нагревающих заряд.
+#### 3.1. Trajectory Routing (Route-Tracing vs. Gate Switching)
+In classical processors, a mathematical operation (for example, vector-matrix multiplication) is executed by sequential reconfiguration of billions of transistors that delay and heat charge transport.
 
-В предлагаемом фотонном чипе вычисление перенесено в пространственную топологию:
-1. Входной вектор данных превращается в когерентный массив световых лучей с заданными амплитудами и фазами.
-2. Свет подается в 3D-лабиринт фазово-пространственных каналов и оптических ключей.
-3. Умножение на веса и суммирование происходят физически во время пролета света через подложку за счет дифракции, фазового сдвига и интерференции.
-4. Результат операции определяется конечной координатой, углом выхода и пространственно-спектральным отпечатком луча на детекторной матрице. Время вычисления равно времени прохождения фотона через кристаллическую решетку ($c/n$, порядок пикосекунд).
+In the proposed photonic chip, computation is transferred into spatial topology:
+1. The input data vector is converted into a coherent array of light beams with specified amplitudes and phases.
+2. Light is injected into a 3D labyrinth of phase-spatial channels and optical switches.
+3. Weight multiplication and summation occur physically during light propagation through the substrate by diffraction, phase shift, and interference.
+4. The operation result is defined by final coordinates, exit angle, and the spatial-spectral beam pattern on the detector array. Compute time equals photon transit time through the crystal lattice ($c/n$, picosecond order).
 
 ┌─────────────────────────────────────────────────────────────────────────┐
-│            ПРИНЦИП ПРОСТРАНСТВЕННО-УГЛОВОЙ МАРШРУТИЗАЦИИ                │
+│            SPATIAL-ANGULAR ROUTING PRINCIPLE                           │
 ├─────────────────────────────────────────────────────────────────────────┤
-│ Входной Вектор ──> [ Расщепление Луча ] ──> [ Прохождение 3D-Лабиринта ]│
-│ (Лазерный импульс)                            (Фазовые каналы / PCM)    │
+│ Input Vector ──> [ Beam Splitting ] ──> [ 3D Labyrinth Propagation ]   │
+│ (Laser pulse)                              (Phase channels / PCM)      │
 │                                                         │               │
 │                                                         ▼               │
-│ Итоговый Ответ <── [ Измерение Координаты ] <── [ Выходной Световой ]   │
-│ (Вектор / Токен)   и Угла Выхода                Узор / Интерференция    │
+│ Final Output <── [ Coordinate and Angle ] <── [ Output Optical ]        │
+│ (Vector / Token)    Measurement               Pattern / Interference    │
 └─────────────────────────────────────────────────────────────────────────┘
-#### 3.2. Встроенные веса и отсутствие «прогрева» (Embedded Weights & Zero-Cold-Start)
-Традиционные ИИ-ускорители требуют обязательного «прогрева» — длительной загрузки терабайтов весов модели из медленной внешней памяти (SSD/DRAM) во внутренние регистры. Фотонный процессор снимает проблему «бутылочного горлышка фон Неймана»:
-* **ЭТАП 1 (Статическая пассивная матрица / Optical ROM):** Фундаментальные, стационарные слои нейросети выжигаются непосредственно в структуре стеклянной/кварцевой подложки в виде интерферометрических паттернов и дифракционных решеток. Свет, проходя через такую «QR-плиту», мгновенно выполняет векторно-матричное умножение с нулевыми затратами электричества.
-* **ЭТАП 2 (Динамическая перенастраиваемая матрица):** Динамические веса формируются локальным изменением показателя преломления $n(x,y,z)$ с помощью твердотельных ключей на базе PCM и $\text{LiNbO}_3$.
-* **Zero-Cold-Start (Нулевой холодный старт):** Модель запечатана в самой физической ткани кристалла. Модулю не требуется загрузка данных. При подаче лазерного импульса вывод (Inference) начинается мгновенно. В режиме ожидания чип потребляет строгий ноль Ватт и не требует тока для поддержания ячеек памяти.
+#### 3.2. Embedded Weights and No Warm-Up (Embedded Weights & Zero-Cold-Start)
+Conventional AI accelerators require mandatory warm-up: prolonged loading of terabytes of model weights from slow external memory (SSD/DRAM) into internal registers. The photonic processor removes the Von Neumann bottleneck:
+* **STAGE 1 (Static passive matrix / optical read-only memory (Optical ROM)):** Fundamental stationary neural-network layers are inscribed directly into glass/quartz substrate structure as interferometric patterns and diffraction gratings. Light passing through this encoded plate performs immediate vector-matrix multiplication with zero electrical expenditure.
+* **STAGE 2 (Dynamic reconfigurable matrix):** Dynamic weights are formed by local refractive-index modulation $n(x,y,z)$ using solid-state switches based on PCMs and $\text{LiNbO}_3$.
+* **zero-cold-start inference:** The model is sealed into the crystal's physical fabric. The module requires no data loading. When a laser pulse is applied, inference starts immediately. In standby mode, the chip targets zero-watt hold power and requires no current to preserve memory cells.
 
 ---
 
-### 4. Thermal & Drift Management (Стабилизация и Термодинамика)
+### 4. Thermal & Drift Management
 
-Так как фазовые характеристики света чувствительны к изменению геометрии материалов, вопрос теплового расширения закрывается на аппаратном уровне:
+Because optical phase characteristics are sensitive to material-geometry variation, thermal drift management is handled at the hardware level:
 
-#### 4.1. Профилированные волноводы и Решетки Брэгга (Bragg Gratings)
-Вместо некогерентного рассеивания света в открытом объеме, лучи жестко локализованы внутри волноводов из $\text{Si}_3\text{N}_4$ или кремния с фотолитографически нанесенными микронасечками.
+#### 4.1. Profiled Waveguides and Bragg Gratings
+Instead of incoherent light scattering in open volume, beams are tightly localized inside waveguides of $\text{Si}_3\text{N}_4$ or silicon with photolithographically applied micro-notches.
 
-При изменении температуры окружающей среды происходит строго линейное и пропорциональное расширение монокристалла во всех направлениях. Расстояние между насечками меняется предсказуемо, что позволяет скомпенсировать термический дрейф незначительным программно-аппаратным сдвигом длины волны задающего лазера на доли нанометра, мгновенно возвращая матрицу в фокус.
+When ambient temperature changes, the monocrystal undergoes linear and proportional expansion in all directions. The spacing between notches changes predictably, allowing thermal drift compensation by a minor hardware-software shift of the source-laser wavelength by fractions of a nanometer, returning the matrix to focus.
 
-#### 4.2. Изотермический режим и Микро-Пельтье элементы
-В отличие от кремниевых GPU, где Джоулев нагрев $I^2R$ на транзисторах создает хаотичные локальные зоны перегрева (Hotspots), фотонный лабиринт не выделяет тепла при прохождении света.
+#### 4.2. Isothermal Regime and Micro-Peltier Elements
+Unlike silicon GPUs, where Joule heating $I^2R$ in transistors creates chaotic local hotspots, the photonic labyrinth does not dissipate heat during light propagation.
 
-Чип находится в изотермическом состоянии. Для точной удержки рабочей температуры на уровне $25^\circ\text{C}$ требуется миниатюрный микро-элемент Пельтье на CMOS-слое мощностью менее 0.5–1 Ватта, что избавляет систему от громоздких систем жидкостного или воздушного охлаждения.
-
----
-
-### 5. Hardware Integration & Applied Systems (Прикладные аппаратные системы)
-
-Фотонный процессор предназначен для создания полностью автономных, высокопроизводительных вычислительных узлов непосредственно на аппаратном уровне:
-
-* **Встраиваемые автономные ИИ-модули (Cold-Cycle Processing):**  
-  Благодаря отсутствию теплового тупика и ликвидации оперативной памяти, процессор с запечатленной моделью может интегрироваться непосредственно в управляющие платы робототехники, автономных транспортных средств, аэрокосмических систем и портативных устройств.
-
-* **Локальный бортовой Inference без связи с облаком:**  
-  Чип способен исполнять полные размеры современных генеративных и мультимодальных моделей на борту устройства. Мощность, которая ранее требовала серверной стойки с киловаттными GPU и жидкостным охлаждением, сжимается до объема одиночного твердотельного монокристалла, работающего от стандартного маломощного источника питания.
+The chip operates in an isothermal state. Precise temperature hold near $25^\circ\text{C}$ requires a miniature micro-Peltier element on the CMOS layer with power below 0.5-1 W, removing the need for bulky liquid or air-cooling systems.
 
 ---
 
-### 6. Prior Art & Differences (Сравнение с существующими решениями)
+### 5. Hardware Integration & Applied Systems
 
-#### Сравнительный анализ архитектурных параметров чипов
+The photonic processor is intended for fully autonomous, high-performance compute nodes implemented directly at the hardware level:
 
-| Параметр                         | Кремниевые GPU/NPU (Nvidia)                      | Оптические MEMS (DMD-матрицы)    | Предлагаемая 3D-PCM Архитектура                         |
+* **Embedded autonomous AI modules (Cold-Cycle Processing):**  
+  Due to removal of the thermal deadlock and operational memory, a processor with an embedded model can be integrated directly into control boards for robotics, autonomous transport, aerospace systems, and portable devices.
+
+* **Local on-device inference without cloud connectivity:**  
+  The chip is proposed to execute full-size contemporary generative and multimodal models on-device. Capability that previously required server racks with kilowatt-scale GPUs and liquid cooling is targeted to be condensed into a single solid-state monocrystal powered by a standard low-power supply.
+
+---
+
+### 6. Prior Art & Differences
+
+#### Comparative Analysis of Chip Architectural Parameters
+
+| Parameter                         | Silicon GPU/NPU (Nvidia)                           | Optical MEMS (DMD arrays)           | Proposed 3D-PCM Architecture                              |
 | :--- | :--- | :--- | :--- |
-| **Физический принцип**           | Переключение полупроводниковых $p$-$n$ переходов | Механический поворот микрозеркал | **Твердотельная фазово-пространственная маршрутизация** |
-| **Задержка ключа (Key Latency)** | Наносекунды ($10^{-9}$ с)                        | Микросекунды ($10^{-6}$ с)       | **Пикосекунды ($10^{-12}$ с)**                          |
-| **Архитектура памяти**           | Внешняя HBM/DRAM (Bottleneck фон Неймана)        | Отсутствует                      | **Запечатлена в геометрию кристалла ($Zero\text{-}Cold\text{-}Start$)**|
-| *Энерговыделение при вычислениях*| Высокое (Джоулев нагрев, тепловой тупик)         | Среднее (Затраты на механический привод) | **Околонулевое ($Cold\text{-}Cycle$, нагрев отсутствует)** |
-| **Плотность параллелизма**       | Ограничена плоскостной литографией и нагревом    | Ограничена физическим размером зеркал | **Сверхвысокая (WDM-мультиплексирование в 3D-объеме)** |
-| **Механический износ**           | Отсутствует                                      | Присутствует (усталость микрошарниров) | **Отсутствует (полноценный монокристалл)** |
+| **Physical principle**            | Semiconductor $p$-$n$ junction switching           | Mechanical micromirror rotation     | **Solid-state phase-spatial routing**                     |
+| **Key latency**                   | Nanoseconds ($10^{-9}$ s)                          | Microseconds ($10^{-6}$ s)          | **Picoseconds ($10^{-12}$ s)**                            |
+| **Memory architecture**           | External HBM/DRAM (Von Neumann bottleneck)         | Absent                              | **Encoded in crystal geometry ($Zero\text{-}Cold\text{-}Start$)** |
+| *Power dissipation during compute*| High (Joule heating, thermal deadlock)             | Medium (mechanical drive cost)      | **Near-zero ($Cold\text{-}Cycle$, no compute heating)**  |
+| **Parallelism density**           | Limited by planar lithography and heating          | Limited by physical mirror size     | **Ultra-high (WDM multiplexing in 3D volume)**            |
+| **Mechanical wear**               | Absent                                              | Present (micro-hinge fatigue)       | **Absent (fully monocrystalline stack)**                  |
 
