@@ -45,7 +45,7 @@ The processor is a multilayer 3D monocrystal that combines classical silicon mic
 #### 2.2. Solid-State Optical Switches
 The architecture fully rejects mechanical elements (MEMS / DMD micromirrors) because of their high inertia (limit near $10^{-6}$ s) and mechanical wear. Instead, it uses solid-state optical gates:
 * **Phase-Change Materials (PCMs):** Thin-film coatings based on phase-change compounds (for example, $\text{Ge}_2\text{Sb}_2\text{Te}_5$ / $\text{GST}$ or $\text{Sb}_2\text{Se}_3$). Under a point control pulse, the material rapidly switches between amorphous (transparent) and crystalline (highly reflective) states.
-* **Electro-optic modulators:** Use of Lithium Niobate (LiNbO3, $\text{LiNbO}_3$) electro-optic modulators, including Lithium Niobate (LiNbO3) phase shifters, that modify refractive index ($\Delta n$) via the Pockels effect.
+* **Electro-optic modulators:** Use of Lithium Niobate (LiNbO3, $\text{LiNbO}_3$) electro-optic modulators, including phase shifters, that modify refractive index ($\Delta n$) via the Pockels effect.
 * **Switching physics:** Local changes in refractive index ($n$) and absorption ($k$) redirect or block optical flux at frequencies up to tens and hundreds of gigahertz (switch latency $10^{-12}$ s) without mechanical friction and without Joule heating from current flow through $p$-$n$ junctions.
 
 #### 2.3. Waveguide Bus and Wavelength-Division Multiplexing (WDM)
@@ -79,7 +79,7 @@ In the proposed photonic chip, computation is transferred into spatial topology:
 #### 3.2. Embedded Weights and Zero-Cold-Start Inference
 Conventional AI accelerators require mandatory warm-up: prolonged loading of terabytes of model weights from slow external memory (SSD/DRAM) into internal registers. The photonic processor removes the Von Neumann bottleneck:
 * **STAGE 1 (Static passive matrix / Optical ROM):** Fundamental stationary neural-network layers are inscribed directly into the structure of a glass/quartz substrate as interferometric patterns and diffraction gratings. This stage acts as optical read-only memory (Optical ROM). Light passing through this encoded plate performs immediate vector-matrix multiplication with zero electrical expenditure.
-* **STAGE 2 (Dynamic reconfigurable matrix):** Dynamic weights are formed by local refractive-index modulation $n(x,y,z)$ using solid-state switches based on PCMs and $\text{LiNbO}_3$.
+* **STAGE 2 (Dynamic reconfigurable matrix):** Dynamic weights are formed by local refractive-index modulation $n(x,y,z)$ using solid-state switches based on PCMs and Lithium Niobate (LiNbO3) phase shifters.
 * **Zero-Cold-Start inference:** The model is sealed into the crystal's physical fabric. The module requires no data loading. When a laser pulse is applied, inference starts immediately. In standby mode, the chip consumes zero standby power and requires no current to preserve memory cells.
 
 ---
@@ -121,6 +121,6 @@ The photonic processor is intended for fully autonomous, high-performance comput
 | **Physical principle**            | Semiconductor $p$-$n$ junction switching           | Mechanical micromirror rotation     | **Solid-state phase-spatial routing**                     |
 | **Key latency**                   | Nanoseconds ($10^{-9}$ s)                          | Microseconds ($10^{-6}$ s)          | **Picoseconds ($10^{-12}$ s)**                            |
 | **Memory architecture**           | External HBM/DRAM (Von Neumann bottleneck)         | Absent                              | **Encoded in crystal geometry ($Zero\text{-}Cold\text{-}Start$)** |
-| *Power dissipation during compute*| High (Joule heating, thermal deadlock)             | Medium (mechanical drive cost)      | **Near-zero ($Cold\text{-}Cycle$, no compute heating)**  |
+| *Power dissipation during compute*| High (Joule heating, thermal deadlock)             | Medium (mechanical drive cost)      | **Near-zero ($Zero\text{-}Cold\text{-}Start$, no compute heating)**  |
 | **Parallelism density**           | Limited by planar lithography and heating          | Limited by physical mirror size     | **Ultra-high (WDM multiplexing in 3D volume)**            |
 | **Mechanical wear**               | Absent                                              | Present (micro-hinge fatigue)       | **Absent (fully monocrystalline stack)**                  |
