@@ -12,7 +12,7 @@ No permission is granted to copy, reproduce, modify, distribute, publish, commer
 
 Repository access grants no patent, trade-secret, know-how, copyright, or other intellectual-property license or rights.
 
-Any commercial evaluation, due diligence, collaboration, licensing, or acquisition discussion requires a separate written agreement with the rights holder.
+Any commercial evaluation, due diligence, collaboration, licensing, or acquisition discussion requires a separate written agreement with the rights holder. Permission requests and discussion inquiries must be directed to the repository owner, andykostin1-maker, through GitHub contact methods associated with this repository.
 
 This notice is not legal advice and does not replace professionally drafted agreements.
 
