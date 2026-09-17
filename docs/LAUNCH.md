@@ -10,15 +10,15 @@ Public announcements must stay non-enabling: do not publish confidential impleme
 
 ## Short announcement
 
-We released OptoCore-3D, a public high-level overview and selective disclosure of a behavioral and thermal simulation for a 3D photonic accelerator architecture for Transformer inference.
+We released OptoCore-3D, a public high-level overview and selective disclosure of a documented behavioral and thermal simulation model for a 3D photonic accelerator architecture for Transformer inference.
+
+Repository: https://github.com/andykostin1-maker/monolithic-3d-photonic-architecture
 
 The model explores optical parallelism, electro-optic gating, 3D memory proximity, transient thermal behavior, and closed-loop DVFS. Under the documented assumptions, the simulator projects up to 1.39 trillion tokens/s and approximately 1.04–1.89 pJ/token at the system-projection boundary.
 
 These are simulation results, not fabricated-silicon measurements. The repository separates core-only power, wall-plug energy, nominal peak throughput, sustained DVFS operation, and transient thermal behavior.
 
 We welcome independent review of the energy accounting, thermal RC model, duty-cycle assumptions, and 50 GHz split-rail driver concept.
-
-Repository: https://github.com/andykostin1-maker/monolithic-3d-photonic-architecture
 
 ## X / Bluesky thread
 
@@ -52,13 +52,22 @@ Show HN: OptoCore-3D — behavioral simulation of a 3D photonic AI accelerator
 
 ## Show HN submission text
 
-OptoCore-3D is a public high-level overview and selective disclosure of a behavioral and thermal simulation for a proposed 3D photonic accelerator for Transformer inference.
+OptoCore-3D is a public high-level overview and selective disclosure of a documented behavioral and thermal simulation model for a proposed 3D photonic accelerator for Transformer inference.
+
+Repository: https://github.com/andykostin1-maker/monolithic-3d-photonic-architecture
 
 It models waveguide parallelism, electro-optic gating, memory-proximity assumptions, transient thermal behavior, and closed-loop DVFS. The current documented model projects up to 1.39 trillion tokens/s and approximately 1.04–1.89 pJ/token at the system-projection boundary.
 
 This is not fabricated hardware and the numbers are not silicon measurements. The repository explicitly separates core-only power from wall-plug energy, nominal peak from sustained DVFS operation, and transient temperature from DC steady-state behavior.
 
-I would especially appreciate criticism of the power accounting, thermal RC assumptions, duty-cycle model, and 50 GHz split-rail driver concept.
+---
+
+### Discussion priorities
+
+- power accounting;
+- thermal RC assumptions;
+- duty-cycle model;
+- 50 GHz split-rail driver concept.
 
 ## Technical outreach message
 
