@@ -96,7 +96,7 @@ When ambient temperature changes, the monocrystal undergoes linear and proportio
 #### 4.2. Isothermal Regime and Micro-Peltier Elements
 Unlike silicon GPUs, where Joule heating $I^2R$ in transistors creates chaotic local hotspots, the photonic labyrinth does not dissipate heat during light propagation.
 
-The chip operates in an isothermal state. Precise temperature hold near $25^\circ\text{C}$ requires a miniature micro-Peltier element on the CMOS layer with power below 0.5–1 W, removing the need for bulky liquid or air-cooling systems.
+The chip operates in an isothermal state. Precise temperature hold near $25^\circ\text{C}$ requires a miniature micro-Peltier element on the CMOS layer in the 0.5–1 W power range, removing the need for bulky liquid or air-cooling systems.
 
 ---
 
