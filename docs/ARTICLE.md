@@ -1,46 +1,104 @@
-# Breaking the Silicon Wall: How OptoCore-3D Reaches >1 Trillion Tokens/Sec with Photonic Compute
+# OptoCore-3D: Architectural Simulation for 3D Photonic Transformer Inference
 
-Modern Large Language Models have pushed traditional CMOS hardware to its absolute physical limits. Standard GPUs are increasingly bound not by compute capability, but by the Von Neumann memory wall and thermal dissipation limits. Every byte moved across a copper trace generates heat, and scaling clock frequencies past a few gigahertz leads to immediate thermal throttling.
+> [!WARNING]
+> This article reports **simulated architectural projections** from a behavioral model. It does **not** report measured data from fabricated silicon.
 
-To break this bottleneck, we designed **OptoCore-3D** — a 3D-integrated optoelectronic accelerator platform engineered to execute Transformer inference at **50 GHz** using light-speed matrix multiplication.
+## Abstract
 
-## The Architecture: Computing at the Speed of Light
+OptoCore-3D is a monolithic 3D photonic accelerator concept evaluated through behavioral simulation. The objective is to test whether high optical parallelism (waveguide fabric + electro-optic gating) can increase Transformer inference throughput under explicit thermal control.
 
-Instead of routing signals through high-capacitance copper bitlines, OptoCore-3D performs vector-matrix operations inside an integrated optical fabric.
+This revision separates four dimensions that are often conflated:
+1. **core-only power** vs **system wall-plug energy**,
+2. **nominal peak operating point** vs **sustained DVFS operating point**,
+3. **transient thermal kinetics** vs **DC steady-state limits**,
+4. **simulation projection** vs **fabricated hardware measurement**.
 
-- **1024 Parallel Waveguides**: Light propagates through a spatial multiplexing bus, eliminating digital interconnect power losses.
-- **Integrated Electro-Optic Gates**: Each waveguide is coupled with 32 ultra-fast solid-state modulation nodes (32,768 active gates per core), modulating optical paths in real time.
-- **3D Hybrid-Bonded Memory**: The optical core is directly bonded to an on-chip SRAM stack via vertical micro-TSVs (<10 μm pitch). This guarantees a multi-terabyte per second feed rate at an I/O cost below 0.05 pJ/bit.
+## 1) Architectural model (what is simulated)
 
-By shifting matrix multiplication to the optical domain, energy consumption drops to **1.14–1.81 pJ/token** — more than 100,000× lower than modern GPU architectures.
+The simulator models a single accelerator core with:
+- 1024 parallel waveguides,
+- 32 modulation nodes per waveguide (32,768 gates/core),
+- 3D proximity assumptions for memory/feed paths,
+- thermal-aware runtime control via DVFS states.
 
-## Taming the Physics: Thermal Relaxation & Closed-Loop DVFS
+The model is intended for architecture exploration, not fabrication sign-off.
 
-Running an optical matrix at 50 GHz generates localized thermal load. With a lumped thermal resistance of R_th = 100 K/W and a thermal relaxation constant τ_thermal = 10.0 ns, unmanaged compute would cause rapid thermal runaway.
+## 2) Power and energy boundaries
 
-To keep the die in a safe operating window without sacrificing performance, we implemented a proactive runtime controller (`DVFSController`):
+### 2.1 Core-only electrical power
 
-```
-[ Core Temp < 350 K ]        --> Full Speed (50 GHz @ Vdd = 1.00 V)
-[ 350 K <= Temp < 360 K ]     --> Proactive DVFS (Scaling down to Vdd = 0.76 V)
-[ Temp >= 360 K ]             --> Emergency Throttle (25 GHz @ Vdd = 0.72 V)
-```
+The reported 0.63-0.92 W range is treated as **core-side modeled power** at selected operating points. These values are not full-system board power.
 
-By dynamically adjusting voltage ahead of thermal spikes, the core maintains maximum throughput while capping peak temperature below the 360 K threshold.
+### 2.2 System wall-plug energy
 
-## Benchmark Results & Simulation
+The 1.14-1.81 pJ/token range is treated as a **system projection boundary** (core + externalized overhead assumptions such as photonic source/conditioning and supporting electronics). It must not be interpreted as a direct silicon measurement.
 
-We validated the system using our open behavioral simulator (`optocore-sim`), sweeping Transformer batch sizes from B=32 to B=256:
+### 2.3 Consistency equations
 
-- **Batch B=32**: Ultra-low latency execution with a modest 0.63 W power profile and peak temperature around 315 K.
-- **Batch B=128**: Optimal operational point delivering >1.3 Trillion Tokens/sec at 0.90 W, actively stabilized by the DVFS controller at ≈358 K.
-- **Batch B=256**: Peak parallel throughput saturation where thermal bounds trigger hard throttling, demonstrating the exact physical capacity limit of a single-core layout.
+\[
+E_{token}=\frac{P}{\Theta}, \quad \Theta=\frac{P}{E_{token}}
+\]
 
-## What's Open vs. What's Proprietary
+Using \(\Theta = 1.39\times10^{12}\) tokens/s with \(P_{core}=0.63\text{ to }0.92\) W implies:
+\[
+E_{core}=0.45\text{ to }0.66\ \text{pJ/token}
+\]
 
-To support the community and establish architectural priority, we are open-sourcing the behavioral simulator software framework (`dvfs.py`, `batch_scheduler.py`, and `heatmaps.py`).
+Therefore, core-energy and wall-plug-energy numbers must be labeled as different boundaries, not mixed as a single metric.
 
-- **Open-Source**: High-level behavioral code, thermal profiling algorithms, and architectural scaling models.
-- **Proprietary Know-How**: Low-level lithographic layout masks, specialized material formulations for gate switching layers, and physical fabrication recipes.
+## 3) Operating points: peak vs sustained
 
-The future of high-throughput AI inference lies in photonics — and OptoCore-3D proves that sub-picojoule computing is achievable today.
+### 3.1 Nominal peak point
+
+A nominal peak point is the highest modeled throughput state (e.g., 50 GHz class operation) before sustained thermal constraints dominate.
+
+### 3.2 Sustained DVFS point
+
+A sustained point is the long-run operating state under closed-loop DVFS where average power is bounded to satisfy thermal constraints over time.
+
+### 3.3 DVFS state definition used in this project
+
+- **State A (full speed):** \(T < 350\,K\)
+- **State B (proactive DVFS):** \(350\,K \le T < 360\,K\)
+- **State C (emergency throttle):** \(T \ge 360\,K\)
+
+These are control-policy thresholds in simulation, not hardware-validated guardbands.
+
+## 4) Thermal kinetics vs steady-state
+
+### 4.1 Transient model
+
+The simulator uses a first-order thermal model:
+\[
+\frac{dT}{dt}=\frac{P(t)R_{th}-(T(t)-T_{amb})}{\tau}
+\]
+with representative parameters \(R_{th}=100\,K/W\), \(\tau=10\,ns\).
+
+### 4.2 DC steady-state check
+
+For constant power, the same model implies:
+\[
+\Delta T_{DC}=P\cdot R_{th}
+\]
+At \(P=0.90\,W\), \(\Delta T_{DC}=90\,K\). With \(T_{amb}=298\,K\), unconstrained steady-state would approach \(\sim388\,K\).
+
+Interpretation: a sub-360 K trajectory can be valid in **transient windows** or with changed effective thermal conditions (lower effective \(R_{th}\), lower average power, or additional cooling). This distinction must remain explicit.
+
+## 5) Results status and evidence type
+
+- **Current evidence:** behavioral simulation outputs and derived equations.
+- **Not yet provided here:** fabricated die, packaged silicon, bench instrumentation, measured wall-plug traces.
+
+Claims in this repository should therefore be phrased as:
+- “the simulator projects…”,
+- “under these assumptions…”,
+- “pending physical validation…”.
+
+## 6) Open material and next validation steps
+
+Open in this repository: architecture narrative, assumptions, equations, and summary metrics.  
+Required for stronger claims in future revisions: calibrated device models, uncertainty intervals, and fabricated-hardware measurements.
+
+## 7) Conclusion
+
+OptoCore-3D is presented as a rigorous architectural simulation study. The technical vision remains ambitious, but the evidence boundary is explicit: current trillion-token-class figures are **modeled projections**, not measured silicon performance.
