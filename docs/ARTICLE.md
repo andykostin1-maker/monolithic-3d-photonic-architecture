@@ -16,8 +16,8 @@ This revision separates four dimensions that are often conflated:
 ## 1) Architectural model (what is simulated)
 
 The simulator models a single accelerator core with:
-- 1024 parallel waveguides,
-- 32 modulation nodes per waveguide (32,768 gates/core),
+- a highly parallel waveguide fabric,
+- multiple electro-optic modulation stages,
 - 3D proximity assumptions for memory/feed paths,
 - thermal-aware runtime control via DVFS states.
 
