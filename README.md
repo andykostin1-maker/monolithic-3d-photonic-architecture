@@ -12,7 +12,7 @@ No permission is granted to copy, reproduce, modify, distribute, publish, commer
 
 Repository access grants no patent, trade-secret, know-how, copyright, or other intellectual-property license or rights.
 
-Any commercial evaluation, due diligence, collaboration, licensing, or acquisition discussion requires a separate written agreement with the rights holder. Permission requests and discussion inquiries must be directed to the repository owner, andykostin1-maker, through the GitHub profile at https://github.com/andykostin1-maker.
+Any commercial evaluation, due diligence, collaboration, licensing, or acquisition discussion requires a separate written agreement with the rights holder. Permission requests and discussion inquiries must be submitted through the repository issue tracker at https://github.com/andykostin1-maker/monolithic-3d-photonic-architecture/issues.
 
 This notice is not legal advice and does not replace professionally drafted agreements.
 
