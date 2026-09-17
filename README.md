@@ -80,7 +80,7 @@ In the proposed photonic chip, computation is transferred into spatial topology:
 Conventional AI accelerators require mandatory warm-up: prolonged loading of terabytes of model weights from slow external memory (SSD/DRAM) into internal registers. The photonic processor removes the Von Neumann bottleneck:
 * **STAGE 1 (Static passive matrix / optical read-only memory (Optical ROM)):** Fundamental stationary neural-network layers are inscribed directly into glass/quartz substrate structure as interferometric patterns and diffraction gratings. Light passing through this encoded plate performs immediate vector-matrix multiplication with zero electrical expenditure.
 * **STAGE 2 (Dynamic reconfigurable matrix):** Dynamic weights are formed by local refractive-index modulation $n(x,y,z)$ using solid-state switches based on PCMs and $\text{LiNbO}_3$.
-* **zero-cold-start inference:** The model is sealed into the crystal's physical fabric. The module requires no data loading. When a laser pulse is applied, inference starts immediately. In standby mode, the chip targets zero standby power and requires no current to preserve memory cells.
+* **Zero-Cold-Start inference:** The model is sealed into the crystal's physical fabric. The module requires no data loading. When a laser pulse is applied, inference starts immediately. In standby mode, the chip targets zero standby power and requires no current to preserve memory cells.
 
 ---
 
@@ -96,7 +96,7 @@ When ambient temperature changes, the monocrystal undergoes linear and proportio
 #### 4.2. Isothermal Regime and Micro-Peltier Elements
 Unlike silicon GPUs, where Joule heating $I^2R$ in transistors creates chaotic local hotspots, the photonic labyrinth does not dissipate heat during light propagation.
 
-The chip operates in an isothermal state. Precise temperature hold near $25^\circ\text{C}$ requires a miniature micro-Peltier element on the CMOS layer in the 0.5–1 W power range, removing the need for bulky liquid or air-cooling systems.
+The chip operates in an isothermal state. Precise temperature control near $25^\circ\text{C}$ requires a miniature micro-Peltier element on the CMOS layer in the 0.5–1 W power range, removing the need for bulky liquid or air-cooling systems.
 
 ---
 
