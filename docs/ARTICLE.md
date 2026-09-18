@@ -3,102 +3,136 @@
 > [!WARNING]
 > This article reports **simulated architectural projections** from a behavioral model. It does **not** report measured data from fabricated silicon.
 
+**Latest public simulation revision:** September 18, 2026.
+
 ## Abstract
 
-OptoCore-3D is a monolithic 3D photonic accelerator concept evaluated through behavioral simulation. The objective is to test whether high optical parallelism (waveguide fabric + electro-optic gating) can increase Transformer inference throughput under explicit thermal control.
+OptoCore-3D is a monolithic 3D photonic accelerator concept evaluated through behavioral simulation. In the current public revision, the simulator explores whether scaling to **4 physical photonic cores** in a **layer-pipelined arrangement**—with **one Transformer layer per core**—can improve inference throughput while remaining inside an explicit thermal-control policy.
 
-This revision separates four dimensions that are often conflated:
-1. **core-only power** vs **system wall-plug energy**,
-2. **nominal peak operating point** vs **sustained DVFS operating point**,
-3. **transient thermal kinetics** vs **DC steady-state limits**,
-4. **simulation projection** vs **fabricated hardware measurement**.
+Under the documented assumptions, the simulator projects:
+- **32 SRAM banks** logically partitioned as **8 banks per core** as an architectural assumption,
+- **16.32 GT/s** throughput versus **4.534 GT/s** for the single-core baseline (**~3.6x modeled speedup**),
+- **252.28 ps/token** modeled token latency versus **757.84 ps/token** for the single-core baseline,
+- **1.0 W total peak optical power** (**0.25 W per core**),
+- **0.35 W total average optical power** under pulsed laser gating with duty cycle **0.35**, and
+- **107.21 pJ/token** as a **modeled system-boundary estimate** that includes the gated optical carrier and electrical overheads.
+
+These are simulation projections under documented assumptions, pending physical validation.
 
 ## 1) Architectural model (what is simulated)
 
-The simulator models a single accelerator core with:
-- a highly parallel waveguide fabric,
-- multiple electro-optic modulation stages,
-- 3D proximity assumptions for memory/feed paths,
-- thermal-aware runtime control via DVFS states.
+The public model represents a **4-core layer-pipelined photonic inference architecture**. Each physical photonic core is assigned one Transformer layer in the modeled pipeline.
+
+The public documentation intentionally stays non-enabling. It therefore limits the architecture description to:
+- multi-core photonic inference stages,
+- logical proximity between compute and memory,
+- thermal-aware control states, and
+- architectural SRAM partition assumptions.
+
+For the current revision, the simulator assumes **32 SRAM banks** that are **logically partitioned into 8 banks per core**. This assumption is used to study reduced contention in the modeled pipeline; it does not constitute experimental proof of zero-congestion memory behavior in fabricated hardware.
 
 The model is intended for architecture exploration, not fabrication sign-off.
 
 ## 2) Power and energy boundaries
 
-### 2.1 Core-only electrical power
+### 2.1 Optical power boundary
 
-The reported 0.63-0.92 W range is treated as **core-side modeled power** at selected operating points. These values are not full-system board power.
+The current revision reports:
+- **1.0 W total peak optical power**, and
+- **0.35 W total average optical power** under pulsed laser gating with duty cycle **0.35**.
 
-### 2.2 System wall-plug energy
+These are optical-carrier figures for the documented operating points.
 
-The 1.14-1.81 pJ/token range is treated as a **system projection boundary** (core + externalized overhead assumptions such as photonic source/conditioning and supporting electronics). It must not be interpreted as a direct silicon measurement.
+### 2.2 System-boundary energy estimate
 
-### 2.3 Consistency equations
+The current revision reports **107.21 pJ/token** as a **modeled system-boundary estimate**. This value includes the gated optical carrier together with modeled electrical overheads. It must not be interpreted as a direct silicon measurement.
+
+### 2.3 Boundary discipline
+
+Power, energy, and temperature claims remain meaningful only when the reporting boundary is explicit. In particular:
+- optical power figures are not full-system energy figures,
+- thermal behavior depends on total dissipative load represented by the model, and
+- public headline numbers must remain labeled as simulator projections.
+
+## 3) Throughput and latency summary
+
+The current public revision compares a single-core baseline to the 4-core layer-pipelined configuration:
+
+| Metric | Single-core baseline | 4-core projected revision |
+|---|---:|---:|
+| Throughput | 4.534 GT/s | 16.32 GT/s |
+| Token latency | 757.84 ps/token | 252.28 ps/token |
+
+The modeled throughput increase is approximately **3.6x**. The latency reduction is reported directly by the simulator for the pipelined architecture. These two outputs should not be collapsed into a simple reciprocal relationship because pipelined throughput and end-to-end token latency capture different aspects of the modeled schedule.
+
+## 4) Thermal policy and operating states
+
+### 4.1 Thermal policy thresholds
+
+The public control policy uses three temperature bands:
+- **State A:** below **350 K**,
+- **State B:** from **350 K** to below **360 K**,
+- **State C:** at or above **360 K**.
+
+These thresholds are policy states used by the simulator. They are not hardware-validated guardbands.
+
+### 4.2 Public thermal model assumptions
+
+The public documentation uses the following thermal assumptions:
+- ambient temperature \(T_{amb}=300\,K\),
+- effective thermal resistance \(R_{th}=40\,K/W\),
+- hotspot factor \(k_{hotspot}=1.36\),
+- thermal time constant \(\tau_{th}\sim1\text{–}10\,\mu s\).
+
+A documentation-level consistency form is:
 
 \[
-E_{token}=\frac{P}{\Theta}, \quad \Theta=\frac{P}{E_{token}}
+T_{ss,est} \approx T_{amb} + P_{eff}\cdot R_{th}\cdot k_{hotspot}
 \]
 
-Using \(\Theta = 1.39\times10^{12}\) tokens/s with \(P_{core}=0.63\text{ to }0.92\) W implies:
+with transient behavior described by:
+
 \[
-E_{core}=0.45\text{ to }0.66\ \text{pJ/token}
+\frac{dT}{dt}=\frac{P_{eff}(t)\cdot R_{th}\cdot k_{hotspot}-(T(t)-T_{amb})}{\tau_{th}}
 \]
 
-Therefore, core-energy and wall-plug-energy numbers must be labeled as different boundaries, not mixed as a single metric.
+Here \(P_{eff}\) denotes the total dissipative load represented by the model, not optical carrier power alone.
 
-## 3) Operating points: peak vs sustained
+### 4.3 Transient averaging vs steady-state interpretation
 
-### 3.1 Nominal peak point
+Because the thermal time constant is on the order of **1–10 microseconds**, while the modeled token pipeline operates on the **picosecond** scale, the thermal model integrates **time-averaged dissipation** rather than instantaneous optical pulses. Public thermal interpretation should therefore distinguish:
+- **transient or duty-averaged behavior**, and
+- **steady-state / DC consistency estimates**.
 
-A nominal peak point is the highest modeled throughput state (e.g., 50 GHz class operation) before sustained thermal constraints dominate.
+### 4.4 Thermal comparison points (simulation outputs / estimates)
 
-### 3.2 Sustained DVFS point
+| Case | Temperature | Policy interpretation |
+|---|---:|---|
+| Unmitigated continuous 1.0 W optical case | 377.62 K | State C |
+| Stated power-reduction mitigation case | 362.39 K | State C |
+| Stated \(R_{th}\)-reduction mitigation case | 353.14 K | State B |
+| Pulsed laser gating (duty cycle 0.35) | 342.26 K | State A |
 
-A sustained point is the long-run operating state under closed-loop DVFS where average power is bounded to satisfy thermal constraints over time.
-
-### 3.3 DVFS state definition used in this project
-
-- **State A (full speed):** \(T < 350\,K\)
-- **State B (proactive DVFS):** \(350\,K \le T < 360\,K\)
-- **State C (emergency throttle):** \(T \ge 360\,K\)
-
-These are control-policy thresholds in simulation, not hardware-validated guardbands.
-
-## 4) Thermal kinetics vs steady-state
-
-### 4.1 Transient model
-
-The simulator uses a first-order thermal model:
-\[
-\frac{dT}{dt}=\frac{P(t)R_{th}-(T(t)-T_{amb})}{\tau}
-\]
-with representative parameters \(R_{th}=100\,K/W\), \(\tau=10\,ns\).
-
-### 4.2 DC steady-state check
-
-For constant power, the same model implies:
-\[
-\Delta T_{DC}=P\cdot R_{th}
-\]
-At \(P=0.90\,W\), \(\Delta T_{DC}=90\,K\). With \(T_{amb}=298\,K\), unconstrained steady-state would approach \(\sim388\,K\).
-
-Interpretation: a sub-360 K trajectory can be valid in **transient windows** or with changed effective thermal conditions (lower effective \(R_{th}\), lower average power, or additional cooling). This distinction must remain explicit.
+These temperatures are simulator outputs or simulator-estimated operating cases for the current revision. They are not measured package or die temperatures.
 
 ## 5) Results status and evidence type
 
-- **Current evidence:** behavioral simulation outputs and derived equations.
+- **Current evidence:** behavioral simulation outputs and simulator-estimated comparison points.
 - **Not yet provided here:** fabricated die, packaged silicon, bench instrumentation, measured wall-plug traces.
 
 Claims in this repository should therefore be phrased as:
 - “the simulator projects…”,
-- “under these assumptions…”,
+- “under the documented assumptions…”,
 - “pending physical validation…”.
 
-## 6) Open material and next validation steps
+## 6) Public disclosure boundary
 
-Open in this repository: architecture narrative, assumptions, equations, and summary metrics.  
-Required for stronger claims in future revisions: calibrated device models, uncertainty intervals, and fabricated-hardware measurements.
+This repository intentionally withholds enabling implementation details such as raw simulator inputs, calibration data, layout/process information, device-construction specifics, physical dimensions, proprietary driver details, and other confidential parameters.
+
+The goal of the public materials is evidence-disciplined technical communication, not a complete manufacturing disclosure.
 
 ## 7) Conclusion
 
-OptoCore-3D is presented as a rigorous architectural simulation study. The technical vision remains ambitious, but the evidence boundary is explicit: current trillion-token-class figures are **modeled projections**, not measured silicon performance.
+OptoCore-3D is presented as a rigorous architectural simulation study. The current public revision supports a **4-core layer-pipelined** projection with **16.32 GT/s** modeled throughput, **252.28 ps/token** modeled latency, and **107.21 pJ/token** modeled system-boundary energy under documented assumptions.
+
+The evidence boundary remains explicit: these are **simulation projections**, not fabricated-silicon measurements.
